@@ -89,8 +89,7 @@ def depthFirstSearch(problem):
     print("Start's successors:", problem.getNextStates(problem.getInitialState()))
     """
     "*** YOUR CODE HERE ***"
-    from util import Stack
-    stack = Stack()     # Create the node stack.
+    stack = util.Stack()     # Create the node stack.
     stack.enqueue(problem.getInitialState())        # Add to node and path stack the agent's starting node.
     visitedNodesList = []       # Create an empty list with all the visited nodes.
     pathList = []       # Create an empty list with the final path from start node to current node.
@@ -115,8 +114,7 @@ def depthFirstSearch(problem):
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    from util import Queue
-    queue = Queue()     # Create the node and path queue.
+    queue = util.Queue()     # Create the node and path queue.
     queue.enqueue(problem.getInitialState())        # Add to node and path queue the agent's starting node.
     visitedNodesList = []       # Create an empty list with all the visited nodes.
     pathList = []       # Create a list with the path from start node to current node.
@@ -142,18 +140,15 @@ def breadthFirstSearch(problem):
 def uniformCostSearch(problem):
     """Search the node of the least total cost first."""
     "*** YOUR CODE HERE ***"
-    from util import PriorityQueue
-    priorityQueue = PriorityQueue()
+    priorityQueue = util.PriorityQueue()
     priorityQueue.enqueue(problem.getInitialState(), 0)
     visitedNodesList = []
     pathList = []
-    pathToCurrentNodePrioQueue = PriorityQueue()
     currentState = priorityQueue.dequeue()
 
     while not (problem.isFinalState(currentState)):
-        if currentState in visitedNodesList:
-            currentState = priorityQueue.dequeue()
-            pathList = pathToCurrentNodePrioQueue.dequeue()
+        if (currentState in visitedNodesList) and (not priorityQueue.isEmpty()):
+            currentState, pathList = priorityQueue.dequeue()
             continue
 
         visitedNodesList.append(currentState)
@@ -164,8 +159,7 @@ def uniformCostSearch(problem):
 
             tempPath = pathList + [direction]
             visitCost = problem.getActionCost(tempPath)
-            priorityQueue.enqueue(child, visitCost)
-            pathToCurrentNodePrioQueue.enqueue(tempPath, visitCost)
+            priorityQueue.enqueue((child, tempPath), visitCost)
     return pathList
 
     # util.raiseNotDefined()
@@ -182,8 +176,7 @@ def nullHeuristic(state, problem=None):
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
-    from util import PriorityQueue
-    priorityQueue = PriorityQueue()
+    priorityQueue = util.PriorityQueue()
     priorityQueue.enqueue(problem.getInitialState(), 0)
     visitedNodesList = []
     pathList = []

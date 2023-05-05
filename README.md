@@ -88,3 +88,8 @@ python pacman.py -l testSearch -p AStarFoodSearchAgent
 ```bash
 python pacman.py -l trickySearch -p AStarFoodSearchAgent
 ```
+## Closest Dot Search
+### <ins>A* Search</ins>
+```bash
+python pacman.py -l bigSearch -p ClosestDotSearchAgent -z .5
+```

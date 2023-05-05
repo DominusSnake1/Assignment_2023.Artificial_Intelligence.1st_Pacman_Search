@@ -379,8 +379,6 @@ def cornersHeuristic(state, problem):
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
 
     "*** YOUR CODE HERE ***"
-    from util import manhattanDistance
-
     if problem.isFinalState(state): return 0
 
     currentState = state[0]
@@ -392,7 +390,7 @@ def cornersHeuristic(state, problem):
         if corner not in visitedCorners: unvisitedCorners.append(corner)
 
     for node in unvisitedCorners:
-        heuristic.append(manhattanDistance(currentState, node))
+        heuristic.append(util.manhattanDistance(currentState, node))
         unvisitedCorners.remove(node)
 
     return max(heuristic)
@@ -494,15 +492,13 @@ def foodHeuristic(state, problem):
     """
     position, foodGrid = state
     "*** YOUR CODE HERE ***"
-    from util import manhattanDistance
-    foodPosition = list(foodGrid)
+    foodPositions = foodGrid.asList()
     heuristic = [0]
 
-    for pos in foodPosition:
-        heuristic.append(manhattanDistance(position, pos))
+    for foodPos in foodPositions:
+        heuristic.append(util.manhattanDistance(position, foodPos))
 
     return max(heuristic)
-
     # return 0
 
 
@@ -523,7 +519,6 @@ class ClosestDotSearchAgent(SearchAgent):
         self.actionIndex = 0
         print('Path found with cost %d.' % len(self.actions))
 
-
     def findPathToClosestDot(self, gameState):
         """
         Returns a path (a list of actions) to the closest dot, starting from
@@ -536,7 +531,9 @@ class ClosestDotSearchAgent(SearchAgent):
         problem = AnyFoodSearchProblem(gameState)
 
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        return search.breadthFirstSearch(problem)
+
+        # util.raiseNotDefined()
 
 
 class AnyFoodSearchProblem(PositionSearchProblem):
@@ -573,7 +570,10 @@ class AnyFoodSearchProblem(PositionSearchProblem):
         x,y = state
 
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        return state in self.food.asList()
+
+        # util.raiseNotDefined()
+
 
 def mazeDistance(point1, point2, gameState):
     """
