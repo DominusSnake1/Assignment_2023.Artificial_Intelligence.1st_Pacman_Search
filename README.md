@@ -57,6 +57,10 @@ python pacman.py -l mediumScaryMaze -p StayWestSearchAgent
 ```bash
 python pacman.py -l bigMaze -z 0.5 -p SearchAgent -a fn=ucs
 ```
+* Open Maze
+```bash
+python pacman.py -l openMaze -z .5 -p SearchAgent -a fn=ucs
+```
 ### <ins>A* Search</ins>
 * Big Maze
 ```bash

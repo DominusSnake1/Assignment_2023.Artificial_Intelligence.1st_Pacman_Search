@@ -227,6 +227,7 @@ class PositionSearchProblem(search.SearchProblem):
             cost += self.costFn((x,y))
         return cost
 
+
 class StayEastSearchAgent(SearchAgent):
     """
     An agent for position search with a cost function that penalizes being in
@@ -297,7 +298,7 @@ class CornersProblem(search.SearchProblem):
     def getInitialState(self):
         """Returns the start state (in your state space, not the full Pacman state space)"""
         "*** YOUR CODE HERE ***"
-        return self.startingPosition, []
+        return self.startingPosition, []        # Return the start position plus a path list from start to current node.
 
         # util.raiseNotDefined()
 
@@ -391,7 +392,6 @@ def cornersHeuristic(state, problem):
 
     for node in unvisitedCorners:
         heuristic.append(util.manhattanDistance(currentState, node))
-        unvisitedCorners.remove(node)
 
     return max(heuristic)
     # return 0 # Default to trivial solution

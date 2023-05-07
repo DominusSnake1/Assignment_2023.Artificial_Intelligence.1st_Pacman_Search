@@ -89,24 +89,24 @@ def depthFirstSearch(problem):
     print("Start's successors:", problem.getNextStates(problem.getInitialState()))
     """
     "*** YOUR CODE HERE ***"
-    stack = util.Stack()     # Create the node stack.
-    stack.enqueue(problem.getInitialState())        # Add to node and path stack the agent's starting node.
-    visitedNodesList = []       # Create an empty list with all the visited nodes.
-    pathList = []       # Create an empty list with the final path from start node to current node.
-    currentState = stack.dequeue()      # currentState represents the current node the agent is examining.
+    stack = util.Stack()
+    stack.enqueue(problem.getInitialState())
+    visitedNodesList = []
+    pathList = []
+    currentState = stack.dequeue()
 
-    while not (problem.isFinalState(currentState)):     # Checks if currentState is goal.
-        if (currentState in visitedNodesList) and (not stack.isEmpty()):        # If visited before or
-            currentState, pathList = stack.dequeue()        # queue is not empty, then skip this iteration.
+    while not (problem.isFinalState(currentState)):
+        if (currentState in visitedNodesList) and (not stack.isEmpty()):
+            currentState, pathList = stack.dequeue()
             continue
 
-        visitedNodesList.append(currentState)       # Add it to the visited list.
-        childrenList = problem.getNextStates(currentState)        # List with currentState's child nodes.
+        visitedNodesList.append(currentState)
+        childrenList = problem.getNextStates(currentState)
 
-        for child, direction, cost in childrenList:       # For each child node of currentState.
-            tempPath = pathList + [direction]       # Temporary list with the path to goal and new direction.
-            stack.enqueue((child, tempPath))       # Add child and path to stack.
-    return pathList     # If currentState was the goal, then we return the list with the path from start to goal.
+        for child, direction, cost in childrenList:
+            tempPath = pathList + [direction]
+            stack.enqueue((child, tempPath))
+    return pathList
 
     # util.raiseNotDefined()
 
@@ -114,25 +114,25 @@ def depthFirstSearch(problem):
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    queue = util.Queue()     # Create the node and path queue.
-    queue.enqueue(problem.getInitialState())        # Add to node and path queue the agent's starting node.
-    visitedNodesList = []       # Create an empty list with all the visited nodes.
-    pathList = []       # Create a list with the path from start node to current node.
-    currentState = queue.dequeue()     # currentState represents the current node the agent is examining.
+    queue = util.Queue()
+    queue.enqueue(problem.getInitialState())
+    visitedNodesList = []
+    pathList = []
+    currentState = queue.dequeue()
 
-    while not (problem.isFinalState(currentState)):     # Checks if currentState is goal.
-        if (currentState in visitedNodesList) and (not queue.isEmpty()):        # If visited before or
-            currentState, pathList = queue.dequeue()        # queue is not empty, then skip this iteration.
+    while not (problem.isFinalState(currentState)):
+        if (currentState in visitedNodesList) and (not queue.isEmpty()):
+            currentState, pathList = queue.dequeue()
             continue
 
-        visitedNodesList.append(currentState)       # Add it to the visited list.
-        childrenList = problem.getNextStates(currentState)      # List with currentState's child nodes.
+        visitedNodesList.append(currentState)
+        childrenList = problem.getNextStates(currentState)
 
-        for child, direction, cost in childrenList:     # For each child node of currentState.
-            tempPath = pathList + [direction]       # Temporary list with the path to goal and new direction.
-            queue.enqueue((child, tempPath))        # Add child and path to queue.
+        for child, direction, cost in childrenList:
+            tempPath = pathList + [direction]
+            queue.enqueue((child, tempPath))
 
-    return pathList     # If currentState was the goal, then we return the list with the path from start to goal.
+    return pathList
 
     # util.raiseNotDefined()
 
